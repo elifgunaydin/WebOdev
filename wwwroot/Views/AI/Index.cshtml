@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Saç Stili Uygula";
+}
+
+<div class="container">
+    <h1>Saç Stili Uygula</h1>
+    <form method="post" enctype="multipart/form-data" asp-controller="AI" asp-action="ApplyHairStyle">
+        <div class="mb-3">
+            <label for="imageFile" class="form-label">Görsel Yükle</label>
+            <input type="file" name="imageFile" id="imageFile" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="hairStyle" class="form-label">Saç Stili Seçin</label>
+            <select name="hairStyle" id="hairStyle" class="form-control" required>
+                <option value="" disabled selected>Saç stili seçiniz</option>
+                <option value="201">Uzun saç</option>
+                <option value="101">Blonde saç</option>
+                <option value="801">Kahkul saç</option>  
+                <option value="603">Kısa saç</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Stil Uygula</button>
+    </form>
+</div>

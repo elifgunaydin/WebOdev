@@ -1,0 +1,25 @@
+﻿@model List<KuaforWebSitesi.Models.CalisanVerimlilik>
+
+<h2>Çalışan Verimlilik Listesi</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Çalışan ID</th>
+            <th>Çalışan Adı</th>
+            <th>Çalışan Soyadı</th>
+            <th>Verimlilik Oranı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var calisan in Model)
+        {
+            <tr>
+                <td>@calisan.CalisanID</td>
+                <td>@calisan.CalisanAd</td>
+                <td>@calisan.CalisanSoyad</td>
+                <td>@calisan.VerimlilikOrani %</td>
+            </tr>
+        }
+    </tbody>
+</table>

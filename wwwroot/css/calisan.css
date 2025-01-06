@@ -1,0 +1,184 @@
+﻿.calisanBody {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: auto;
+}
+
+.calisanBody img {
+    width: 100%;
+    height: auto;
+}
+
+.headerText {
+    position: absolute;
+    text-align: center;
+    margin-top: 50px; 
+    background-color: transparent;
+    width: auto; 
+    top: 0%;
+}
+
+.headerText p {
+    background-color: transparent;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 2vw; 
+    color: #CBB26A;
+    margin-bottom: 0px;
+    font-weight: bold;
+    margin-top: 5px !important;
+}
+
+.headerText h3 {
+    background-color: transparent;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1vw; /* Ekran genişliğine göre font boyutunu ayarla */
+    color: #333;
+    margin: 0;
+    padding: 10px;
+}
+
+
+.about {
+    display: flex;
+    border-radius: 10px;
+    margin-top: -70px !important;
+    margin-bottom: 0px !important;
+    margin-left: 10px;
+    position : absolute;
+    top: 50%; 
+    background-color: transparent;
+    transform: translateY(-50%); 
+    gap: 20px;
+    justify-content: center;
+    margin-top: 60px;
+    flex-wrap: wrap;
+}
+
+
+.calisan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+    margin-top: 100px;
+    align-items: center;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: transparent;
+    position: relative; /*sonradan*/
+}
+
+.calisan .calisanAdAlan {
+    position: absolute;
+    margin-top: -100px;
+    margin-bottom: 0px;
+    position: absolute;
+    color: #CBB26A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem !important;
+    opacity: 0;
+    background-color: transparent !important;
+    font-family: 'Josefin Sans',sans-serif;
+    transition: opacity 0.3s ease-in-out; /* Hover'da yazı görünür olsun */
+}
+
+.calisan .hizmetler {
+    position: absolute;
+    color: #CBB26A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem; /* Font boyutu arttırıldı */
+    opacity: 0;
+    background-color: transparent;
+    font-family: 'Josefin Sans', sans-serif;
+    transition: opacity 0.3s ease-in-out;
+    margin-top: 8px;
+}
+
+
+.calisan .calisanAdAlan h6, .calisan .hizmetler .h6 {
+    background-color: transparent;
+    font-size: 1rem !important; 
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+.calisan:hover .calisanAdAlan,
+.calisan:hover .hizmetler {
+    opacity: 1; /* Hover'da yazılar görünür olur */
+}
+
+    .calisan:hover .calisanAdAlan ~ img,
+    .calisan:hover .hizmetler ~ img {
+        filter: brightness(50%); /* Resmin kararması */
+    }
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem; /* Font boyutu ayarlandı */
+    justify-content: center;
+    background-color: transparent;
+}
+
+
+li {
+    margin: 1px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1rem; /* Font boyutu ayarlandı */
+    color: #CBB26A;
+    background-color: transparent;
+}
+
+.calisan:hover img {
+    filter: brightness(50%); /* Resmin kararması */
+    transition: filter 0.3s ease-in-out; /* Kararma efekti */
+}
+
+.about .calisan img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+ 
+.about .calisan img:hover {
+    filter: brightness(50%); 
+    opacity: 1;
+}
+
+
+@media (max-width: 768px) {
+    .headerText p, .headerText h3 {
+        font-size: 4vw;
+    }
+
+    .calisan {
+        width: 150px; 
+        height: 150px;
+    }
+
+    .calisan img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .about {
+        flex-direction: column;
+    }
+}

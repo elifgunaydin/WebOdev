@@ -1,0 +1,64 @@
+﻿@model IEnumerable<KuaforWebSitesi.Models.Calisan>
+
+<div class="alert-danger">@TempData["msj"]</div>
+@if (Model.Count() <1)
+{
+    <div style="text-align:center" class="alert-info">Herhangi Bir Müşteri Yok</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CalisanAd)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CalisanSoyad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CalisanMail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CalisanTelefon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CalisanSifre)
+                </th>
+           
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalisanAd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalisanSoyad)
+                    </td>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalisanMail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalisanTelefon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalisanSifre)
+                    </td>
+                   
+                  
+                    <td>
+                       @Html.ActionLink("Edit", "CalisanGuncelle", new { id = item.CalisanID })| 
+                        @Html.ActionLink("Delete", "CalisanSil", new { id = item.CalisanID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="@Url.Action("CalisanEkle", "Calisan")" class="btn btn-primary">Çalışan Ekle</a>
+}

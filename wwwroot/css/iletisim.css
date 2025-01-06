@@ -1,0 +1,151 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #CBB26A;
+}
+
+.container {
+    background-color: #f9f9f9;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+h1 {
+    font-family: 'Dancing Script',cursive;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #CBB26A;
+}
+
+.contact-info, .contact-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+    .contact-info ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .contact-info ul li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+            .contact-info ul li i {
+                margin-right: 10px;
+                color: #007BFF;
+            }
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+    form input, form textarea, form button {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    form button {
+        background-color:  #CBB26A;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-header h1 {
+    font-size: 2.5rem;
+    text-align:center;
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.info-box {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h2 {
+    margin-top: 0;
+    text-align: center;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+iframe {
+    width: 100%;
+    height: 300px;
+    border: 0;
+}
+
+.info-box i {
+    display: inline-block; /* Blok düzeneği sağlar */
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 2rem; /* Daha büyük ikon boyutu */
+    color: #555; /* Yumuşak bir renk */
+    background-color: #f0f0f0; /* Hafif arka plan */
+    padding: 15px; /* İkonun etrafına boşluk ekler */
+    border-radius: 50%; /* Yuvarlak şekil */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+    transition: all 0.3s ease-in-out; /* Geçiş animasyonu */
+}
+
+.info-box i:hover {
+    color: #fff; /* İkon rengini beyaz yap */
+    background-color: #CBB26A; /* Arka plan rengini mavi yap */
+    transform: scale(1.2); /* Hafif büyütme efekti */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Gölgeyi güçlendir */
+}
+
+
+.info-box p {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.info-box a {
+    color: #007BFF;
+    text-decoration: none;
+    margin-bottom:15px;
+}
+
+.info-box a:hover {
+    text-decoration: underline;
+}
+

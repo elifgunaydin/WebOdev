@@ -1,0 +1,254 @@
+﻿@model KuaforWebSitesi.Models.Randevu
+@if (TempData["msj"] != null)
+{
+    <div class="temp-message">
+        <p>@TempData["msj"]</p>
+    </div>
+    
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head class="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/randevu.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+          rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="~/css/fontFamily.css" asp-append-version="true" />
+</head>
+<body class="randevu">
+    
+       <img src="~/web/images/girisSayfasi.png" />
+    <form id="randevuForm" asp-action="RandevuAlFinal" method="post" class="mb-4">
+        @Html.AntiForgeryToken()
+        <h2>Randevu Sistemi</h2>
+        <!-- Hizmet Seçimi -->
+        <div class="mb-3">
+            <label for="hizmet" class="form-label">Hizmet Seç:</label>
+            <select id="hizmet" name="hizmetID" class="form-select" onchange="getCalisanlar()" required>
+                <option value="">Hizmet Seçin</option>
+                @if (ViewData["Hizmetler"] != null)
+                {
+                    foreach (var hizmet in (List<KuaforWebSitesi.Models.Hizmetler>)ViewData["Hizmetler"])
+                    {
+                        <option value="@hizmet.HizmetID">@hizmet.HizmetAdi</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <!-- Çalışan Seçimi -->
+        <div class="mb-3">
+            <label for="calisan" class="form-label">Çalışan Seç:</label>
+            <select id="calisan" name="calisanID" class="form-select" disabled onchange="GetCalisanGunler()" required>
+                <option value="">Önce Hizmet Seçin</option>
+            </select>
+        </div>
+
+        <!-- Çalışan Günleri Seçimi -->
+
+            <div class="mb-3">
+                <label for="Tarih" class="form-label">Randevu Günü Seç:</label>
+                <input type="date" id="Tarih" name="Tarih" class="form-control" required
+                       min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            </div>
+        <!-- Çalışan Günleri Görüntüleme Alanı -->
+        <div class="mb-3">
+            <label class="form-label">Çalışan Uygun Günler:</label>
+            <span id="calisanGunlerNotu" class="text-success"></span>
+        </div>
+
+        
+
+        <!-- Saat Seçimi -->
+        <div class="mb-3">
+            <label for="Saat" class="form-label">Randevu Saati Seçin:</label>
+            <select id="Saat" name="Saat" class="form-select" required>
+                <option value="">Saat Seçin</option>
+                <!-- Saatler burada dinamik olarak yüklenecek -->
+            </select>
+        </div>
+
+        <!-- Müşteri Seçimi -->
+        <div class="mb-3">
+            <input type="hidden" id="musteri" name="musteriID" value="@ViewData["MusteriID"]" />
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Randevu Al</button>
+    </form>
+
+    
+
+
+  
+
+    <script>
+             document.getElementById("randevuForm").addEventListener("submit", function (event) {
+            const saat = document.getElementById("Saat").value;
+            const tarih = document.getElementById("Tarih").value;
+
+            // Eğer tarih veya saat seçilmediyse uyarı göster
+            if (!tarih || !saat || saat === "00:00") {
+                alert("Lütfen geçerli bir tarih ve saat seçin.");
+                event.preventDefault(); // Formun gönderilmesini engelle
+            }
+        });
+
+     
+
+        // Hizmet seçildiğinde çalışanları yükle
+        async function getCalisanlar() {
+            const hizmetID = document.getElementById("hizmet").value;
+            const calisanDropdown = document.getElementById("calisan");
+
+            if (!hizmetID) {
+                calisanDropdown.innerHTML = '<option value="">Hizmet Seçin</option>';
+                calisanDropdown.disabled = true;
+                return;
+            }
+
+            try {
+                const response = await fetch(`/Randevu/GetCalisanlar?hizmetID=${hizmetID}`);
+                const calisanlar = await response.json();
+
+                if (response.ok && calisanlar.length) {
+                    calisanDropdown.innerHTML = '<option value="">Çalışan Seçin</option>';
+                    calisanlar.forEach(calisan => {
+                        calisanDropdown.innerHTML += `<option value="${calisan.calisanID}">${calisan.ad} ${calisan.soyad}</option>`;
+                    });
+                    calisanDropdown.disabled = false;
+                } else {
+                    alert("Çalışanlar yüklenemedi. Lütfen tekrar deneyin.");
+                }
+            } catch (error) {
+                console.error("Çalışanları alırken bir hata oluştu:", error);
+            }
+        }
+
+        // Çalışan seçildiğinde günleri yükle
+                async function GetCalisanGunler() {
+            const calisanID = document.getElementById("calisan").value;
+            const Tarih = document.getElementById("Tarih");
+            const calisanGunlerNotu = document.getElementById("calisanGunlerNotu");
+
+            if (!calisanID) return;
+
+            try {
+                const response = await fetch(`/Randevu/GetCalisanGunler?calisanID=${calisanID}`);
+                const gunler = await response.json();
+
+                if (response.ok && gunler.length) {
+                    const gunlerMap = { "pazartesi": 1, "salı": 2, "çarşamba": 3, "perşembe": 4, "cuma": 5, "cumartesi": 6, "pazar": 0 };
+                    const availableDays = gunler.map(gun => gunlerMap[gun.toLowerCase()]);
+
+                  
+                    Tarih.disabled = false;
+
+                   
+                    Tarih.addEventListener('input', function() {
+                        const selectedDate = new Date(Tarih.value);
+                        const selectedDay = selectedDate.getDay();
+
+                        if (!availableDays.includes(selectedDay)) {
+                            alert("Seçtiğiniz gün, bu çalışan için uygun değil.");
+                            Tarih.value = '';  // Clear the selected date
+                        }
+                        
+                    });
+                      calisanGunlerNotu.textContent = `Bu çalışan şu günlerde çalışıyor: ${gunler.join(", ")}`;
+                  
+                  
+                } else {
+                    alert("Çalışan günleri yüklenemedi.");
+                }
+            } catch (error) {
+                console.error("Günleri alırken bir hata oluştu:", error);
+            }
+        }
+
+
+                /// Tarih ve saat verilerini formdan alacak şekilde düzenlendi
+        async function getUygunSaatler() {
+            const calisanID = document.getElementById("calisan").value;
+            const tarih = document.getElementById("Tarih").value;
+            const hizmetID = document.getElementById("hizmet").value;
+            const saatDropdown = document.getElementById("Saat");
+
+            // Eğer herhangi bir alan boşsa saatler devre dışı bırakılır
+            if (!calisanID || !tarih || !hizmetID) {
+                saatDropdown.innerHTML = '<option value="">Saat Seçin</option>';
+                saatDropdown.disabled = true; // Eğer eksik bir alan varsa saatler devre dışı
+                return;
+            }
+
+            // Tarih formatını kontrol et
+            const tarihObj = new Date(tarih);
+            if (isNaN(tarihObj.getTime())) {
+                alert("Geçerli bir tarih girin.");
+                return;
+            }
+
+            // Saatleri temizleyelim önce
+            saatDropdown.innerHTML = '<option value="">Saat Seçin</option>';
+            saatDropdown.disabled = true; // Saatler yüklenene kadar disabled yapalım
+
+            try {
+                const response = await fetch(`/Randevu/GetUygunSaatler?calisanID=${calisanID}&tarih=${tarih}&hizmetID=${hizmetID}`);
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.message);  // Hata mesajını göster
+                    return;
+                }
+
+                const saatler = data;
+
+                if (saatler.length) {
+                    // Uygun saatler varsa listeyi güncelle
+                    saatDropdown.innerHTML = '<option value="">Saat Seçin</option>';
+                    saatler.forEach(saat => {
+                        saatDropdown.innerHTML += `<option value="${saat}">${saat}</option>`;
+                    });
+                    saatDropdown.disabled = false;  // Saatler yüklendiğinde aktif yapalım
+                } else {
+                    // Eğer uygun saat yoksa, "Uygun saat bulunamadı" mesajı göster
+                    saatDropdown.innerHTML = '<option value="">Uygun saat bulunamadı</option>';
+                    saatDropdown.disabled = true;
+                }
+            } catch (error) {
+                console.error("Saatleri alırken bir hata oluştu:", error);
+                alert("Saatler alınırken bir hata oluştu.");
+            }
+        }
+
+
+        // Tarih değiştiğinde saatlerin güncellenmesi
+        document.getElementById("Tarih").addEventListener("change", function () {
+            getUygunSaatler(); // Saatler değişen tarihe göre yeniden yüklenir
+        });
+
+       
+        document.getElementById("hizmet").addEventListener("change", getUygunSaatler);
+        document.getElementById("Tarih").addEventListener("change", getUygunSaatler);
+
+                    
+
+
+    </script>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
+

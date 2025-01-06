@@ -1,0 +1,154 @@
+﻿@using System.Linq
+@model List<KuaforWebSitesi.Models.Calisan>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/calisan.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/fontFamily.css" asp-append-version="true" />
+</head>
+
+<body class="calisanKismi">
+    <div class="alert-danger">@TempData["msj"]</div>
+    <div class="calisanBody">
+        <img src="~/web/images/calisanlar/calisan.png" alt="background" />
+        <div class="headerText">
+            <p>
+                "ShineLaB Uzmanları"
+            </p>
+            <h3>
+                ShineLab'te her stilist ve estetisyen kendi işini yürütmektedir ve bu nedenle benzersiz bir bakış açısına sahiptir.
+                Hepsi, müşterilerine özel bir deneyim ve yaklaşım sunar.
+            </h3>
+        </div>
+        @*  @*  <h2>Stilistler</h2> *@
+        @*         <div class="about">
+            <div class="calisan">
+                <img src="~/web/images/calisanlar/calisan1.jpg" alt="calisan1" />
+                <p class="calisanAdAlan">
+                    Dilan Kaya<br />
+                    Günleri: Pazartesi - Cuma<br />
+                    Verilen Hizmetler:<br />
+                    -Saç şekillendirme<br />
+                    -Saç Boyama <br />
+                    -Gelin <br />
+                </p>
+            </div>
+
+            <div class="calisan">
+                <img src="~/web/images/calisanlar/calisan2.jpg" alt="calisan2">
+                <p class="calisanAdAlan">
+                    Elif Yılmaz<br />
+                    Günleri: Salı, Çarşamba, Perşembe, Cuma, Cumartesi<br />
+                    Verilen Hizmetler: <br />
+                    -Saç şekillendirme<br />
+                    -Saç Boyama <br />
+                    -Gelin <br />
+                </p>
+            </div>
+
+            <div class="calisan">
+                <img src="~/web/images/calisanlar/calisan3.jpg" alt="calisan3">
+                <p class="calisanAdAlan">
+                    Şeyma Çetin<br />
+                    Günleri: Pazartesi, Çarşamba, Cuma, Cumartesi<br />
+                    Verilen Hizmetler:<br />
+                    -Saç şekillendirme<br />
+                    -Saç Boyama <br />            
+                </p>
+            </div>
+
+            <div class="calisan">
+                <img src="~/web/images/calisanlar/calisan4.jpg" alt="calisan4" />
+                <p class="calisanAdAlan">
+                    Ece Tuncer<br />
+                    Günleri:Pazartesi, Salı, Cuma, Cumartesi.<br />
+                    Verilen Hizmetler:<br />
+                    -Her şey.
+                </p>
+            </div>
+
+            <div class="calisan">
+                <img src="~/web/images/calisanlar/calisan5.jpg" alt="calisan5" />
+                <p class="calisanAdAlan">
+                    Aslı Şahin<br />
+                    Salon Günü: Pazartesi, Cuma, Pazar<br />
+                    Verilen Hizmetler:<br />
+                    -Saç şekillendirme<br />
+                </p>
+            </div>
+
+
+        </div>
+        <div class="altKisim">
+          @*   <h2>Estetisyenler</h2> *@
+        @*   <div class="calisan">
+                <img src="~/web/images/calisanlar/acalisan1.jpeg" alt="acalisan1" />
+                <p class="calisanAdAlan">
+                    Ceyda Özdemir<br />
+                    Salon Günü: Salı,Çarşamba Cuma, Cumartesi, Pazar.<br />
+                    Verilen Hizmetler:<br />
+                    -Manikür & Pedikür<br />
+                    -Cilt 
+                </p>
+            </div>
+
+            <div class="calisan">
+                <img src="~/web/images/calisanlar/acalisan2.jpg" alt="acalisan2" />
+                <p class="calisanAdAlan">
+                    Nisan Kaya<br />
+                    Günleri:Pazartesi, Çarşamba, Perşembe, Pazar.<br />
+                    Verilen Hizmetler:<br />
+                    -Manikür & Pedikür <br />
+                    -Cilt
+                </p>
+            </div>
+        </div> *@ 
+
+        <div class="about">
+            @foreach (var calisan in Model)
+            {
+                var fotoYolu = Url.Content($"~/web/images/calisanlar/{calisan.CalisanAd}{calisan.CalisanSoyad}.jpg");
+                var varsayilanFoto = Url.Content("~/web/images/calisanlar/defaultt.png");
+
+                <div class="calisan">
+                    <img src="@fotoYolu" onerror="this.src='@varsayilanFoto'" alt="@calisan.CalisanAd @calisan.CalisanSoyad" />
+                    <div class="calisanAdAlan">
+                        <h6>@calisan.CalisanAd @calisan.CalisanSoyad</h6>
+                    </div>
+                    <br />
+                    <div class="hizmetler">
+                        <h6>Verilen Hizmetler:</h6>
+                        <br />
+                        <ul>
+                            @{
+                                var yazdirilanKategoriler = new HashSet<string>();  // Kategorileri tutacak HashSet
+                            }
+
+                            @foreach (var hizmet in calisan.CalisanHizmetler)
+                            {
+                                @if (!yazdirilanKategoriler.Contains(hizmet.Hizmet.HizmetKategoriler.KategoriAdi))  // KategoriAdi'yi kontrol ediyoruz
+                                {
+                                    yazdirilanKategoriler.Add(hizmet.Hizmet.HizmetKategoriler.KategoriAdi);  // Eğer yazdırılmamışsa, ekliyoruz
+                                    <li>
+                                        @hizmet.Hizmet.HizmetKategoriler.KategoriAdi  <!-- KategoriAdi'ni yazdırıyoruz -->
+                                    </li>
+
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
+

@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/fontFamily.css" asp-append-version="true" />
+</head>
+<body class="home">
+    <div class="homeBody">
+        <img src="~/web/images/ShineLaB.png" alt="background">
+        <h1>ShineLaB</h1>
+        <script src="~/js/scroll.js"></script>
+    </div>
+    <div class="homeLogo">
+        <img src="~/web/images/kuaforLogo.png" alt="logo">
+    </div>
+    <article class="homeArticle">
+        <b>ShineLaB: Güzelliğinizin İmzası</b> <br />
+        ShineLaB, güzelliğinizi sadece yansıtmıyor; ona kendi imzamızı atıyoruz.<br />
+        Şıklığın ve samimiyetin buluştuğu salonumuzda, uzman ekibimiz sizleri özenle ağırlıyor ve her detayda parlaklığınızı ön plana çıkarıyor.<br />
+        <b> Özgün Hizmet, Eşsiz Deneyim</b><br />
+        Sizlere sunduğumuz hizmetler, kişisel tarzınızı en güzel şekilde yansıtmak ve hayalinizdeki görünümü elde etmek için tasarlandı.<br /> ShineLaB'de, saç ve cilt bakımından profesyonel hizmetlerimize kadar her şey, güzelliğinize bizim imzamızı atmamız için titizlikle seçildi.<br />
+        <b>Parlaklık ve Zarafet, Her Zaman Yanınızda</b><br />
+        Her ziyaretinizde kendinizi özel hissedeceğiniz, güzelliğinizin her detayını kucaklayan bir deneyim için ShineLaB'i tercih edin.<br /> Yalnızca güzellik değil, zarafet ve özgüven ile buluşan bu özel anı, hayatınızın bir parçası yapın.<br />
+        <b>ShineLaB: Güzelliğinizin Parlayan İmzası</b> <br />
+        Gelin, sadece saçınıza değil, tüm ruhunuza parlaklık katacak bir yolculuğa çıkın.<br /> ShineLaB'de güzellik, her zaman sizinle.
+    </article>
+    <div class="homePhotos">
+        <div class="container">
+            <!--SAYFALAR EKLENİNCE DEĞİŞTİR-->
+            <a class="" asp-area="" asp-controller="Hizmetler" asp-action="Index"><img src="~/web/images/sac.jpg" alt="sac"><div class="caption">SAÇ</div></a>
+        </div>
+
+        <div class="container">
+           <a class="" asp-area="" asp-controller="Hizmetler" asp-action="Index"><img src="~/web/images/makyaj.jpg" alt="makyaj"><div class="caption">MAKYAJ</div></a>
+        </div>
+        <div class="container">
+            <a class="" asp-area="" asp-controller="Hizmetler" asp-action="Index"><img src="~/web/images/cilt.jpg" alt="cilt"><div class="caption">CİLT</div></a>
+        </div>
+        <div class="container">
+            <a class="" asp-area="" asp-controller="Hizmetler" asp-action="Index"> <img src="~/web/images/manikur.jpg" alt="manikur"><div class="caption">MANİKÜR</div></a>
+        </div>
+        <div class="container">
+            <a class="" asp-controller="Home" asp-action="Index"> <img src="~/web/images/randevu.png" alt="randevu"><div class="caption">RANDEVU</div></a>
+        </div>
+    </div>
+    </body>
+</html>
+
+

@@ -1,0 +1,67 @@
+﻿@model Musteri
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/kayit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/fontFamily.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/js/Görünür.js" asp-append-version="true" />
+</head>
+<body class="kayitSistemi">
+    <div class="kayit">
+       <img src="~/web/images/ShineLaBflu.png" alt="kayit"> 
+      <div class="alert-danger">@TempData["msj"]</div> 
+        <form asp-controller="Musteri" asp-action="MusteriKaydet">
+            <div class="formGrup">
+                <input id="MusteriAd" class="form-control" asp-for="MusteriAd" type="text" required />
+                <label for="MusteriAd">Adınız</label>
+                <span asp-validation-for="MusteriAd" class="text-danger"></span>
+            </div>
+
+            <div class="formGrup">
+                <input id="MusteriSoyad" class="form-control" asp-for="MusteriSoyad" type="text" required />
+                <label for="MusteriSoyad">Soyadınız</label>
+                <span asp-validation-for="MusteriSoyad" class="text-danger"></span>
+            </div>
+
+            <div class="formGrup">
+                <input id="MusteriMail" class="form-control" asp-for="MusteriMail" type="email" required />
+                <label for="MusteriMail">E-Mailiniz</label>
+                <span asp-validation-for="MusteriMail" class="text-danger"></span>
+            </div>
+
+            <div class="formGrup">
+                <input id="MusteriTelefon" class="form-control" asp-for="MusteriTelefon" type="tel" required />
+                <label for="MusteriTelefon">Telefon Numarası</label>
+                <span asp-validation-for="MusteriTelefon" class="text-danger"></span>
+
+            </div>
+            <div class="formGrup">
+                <input id="MusteriSifre" class="form-control" asp-for="MusteriSifre" type="password" required />
+                <label for="MusteriSifre">Şifre Oluşturun</label>
+                <button type="button" onclick="SifreyiGoruntule('MusteriSifre')">Şifreyi Göster</button>
+                <span asp-validation-for="MusteriSifre" class="text-danger"></span>
+            </div>
+
+          @*   <div class="formGrup">
+                <input id="MusteriSifreTekrar" class="form-control" asp-for="MusteriSifreTekrar" type="password" required />
+                <label for="MusteriSifreTekrar">Şifreyi Tekrar Girin</label>
+                <span asp-validation-for="MusteriSifreTekrar" class="text-danger"></span>
+            </div>
+ *@
+            <a href="@Url.Action("MusteriGiris", "Musteri")">Hesabınız var mı?</a>
+
+
+             <input class="button" type="submit" value="Kaydol" />
+           
+        </form>
+    </div>
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+    <script src="~/js/Görünür.js"></script>
+</body>
+</html>

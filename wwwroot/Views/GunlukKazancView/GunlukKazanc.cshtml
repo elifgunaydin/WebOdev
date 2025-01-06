@@ -1,0 +1,31 @@
+﻿@model List<GunlukKazancViewModel>
+
+@{
+    ViewData["Title"] = "Günlük Kazançlar";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Çalışan ID</th>
+            <th>Çalışan Adı</th>
+            <th>Çalışan Soyadı</th>
+            <th>Toplam Kazanç</th>
+            <th>Günlük Kazanç</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CalisanID</td>
+                <td>@item.CalisanAd</td>
+                <td>@item.CalisanSoyad</td>
+                <td>@item.ToplamKazanc.ToString("C2")</td> <!-- Para biriminde formatlama -->
+                <td>@item.GunlukKazanc.ToString("C2")</td> <!-- Para biriminde formatlama -->
+            </tr>
+        }
+    </tbody>
+</table>

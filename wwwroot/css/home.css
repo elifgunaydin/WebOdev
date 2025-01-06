@@ -1,0 +1,137 @@
+﻿.homeBody {
+    margin-top:0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden; /* Resmin dışına taşan içerikleri gizler */ 
+}
+
+.homeBody img {
+    width: 100%;
+    height: auto;
+    margin-top:0px;
+    object-fit: cover;
+}
+
+.homeBody h1 {
+    position: absolute;
+    font-style: italic; 
+    font-family: 'Dancing Script',cursive;
+    top: 72%; 
+    left: 38%;
+    font-weight: bold; 
+    transform: translate(-50%, -50%);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); 
+    font-size: 8vw; /* Ekran genişliğine göre font boyutunu ayarlar */
+    color: white;
+    background-color: transparent; /* Arka plan rengini şeffaf yapar */
+}
+
+.homeBody img {
+    transform: translateX(-50px);
+    transition: all 0.8s; 
+    opacity: 0; 
+}
+
+.homeBody.active img {
+    transform: translateX(0px); 
+    opacity: 1; 
+}
+
+
+.homeBody h1 {
+    position: absolute;
+    transform: translateY(-20px);
+    transition: all 1s;
+    opacity: 0;
+}
+
+.homeBody.active h1 {
+    position: absolute;
+    transform: translateY(0px);
+    opacity: 1;
+}
+
+.homeLogo {
+    display: flex;
+    justify-content: center; /* Yatay olarak ortalar */
+    align-items: center; /* Dikey olarak ortalar */
+}
+
+.homeLogo img {
+    margin-bottom:50px;
+    margin-top:50px;
+    padding:0;
+    width:10%; 
+    height: auto; 
+}
+
+.homeArticle b{
+    font-size: 3vh;
+    font-family: 'Josefin Sans',sans-serif;
+    text-align: center;
+    color: #CBB26A;
+}
+
+*{
+    background-color:#f9f9f9;
+}
+
+
+.homeArticle {
+    font-size: 2.8vh;
+    font-family: 'Josefin Sans',sans-serif;
+    text-align: center;
+    color: black;
+}
+.home {
+    background-color: #f9f9f9;
+}
+
+.homePhotos {
+    background-color:#f9f9f9;
+    display: flex;
+
+    justify-content: center; /* Resimleri ortalar */
+    gap: 1%; /* Resimler arasındaki boşluk */
+}
+
+.homePhotos img {
+    margin-left: 30px;
+    margin-right:0px;
+    margin-top: 30px;
+    margin-bottom:50px;
+    border-radius:5%;
+    width: 200px;
+    height: 400px; 
+    cursor: pointer;
+}
+
+.homePhotos .container {
+    position: relative;
+}
+
+.homePhotos img:hover {
+    filter: brightness(50%); /* Tıklama efektinde resmi karartır */
+}
+
+
+.homePhotos .container .caption {
+    position: absolute;
+    color: #CBB26A;
+    top: 80%;
+    left: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    opacity: 0;
+    background-color: transparent;
+    font-family: 'Josefin Sans',sans-serif;
+}
+
+.homePhotos img:hover + .caption {
+    opacity: 1; /* Hover durumunda görünür */
+}

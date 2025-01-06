@@ -1,0 +1,139 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.profile-container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.appointment-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.appointment-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-header p {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #CBB26A;
+}
+
+.appointment-details p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.appointment-item .appointment-header {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.appointment-item .appointment-details p {
+    font-size: 0.9em;
+}
+
+.appointment-item:last-child {
+    margin-bottom: 0;
+}
+
+.alert {
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #f9f9f9;
+    color: black;
+    padding: 10px;
+    text-align: center;
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.info-section p {
+    font-size: 1.1em;
+}
+
+.appointment-section {
+    margin-top: 20px;
+}
+
+.appointment-item::before {
+    content: "📅";
+    margin-right: 10px;
+}
+
+.no-appointment {
+    text-align: center;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    padding: 8px 16px;
+    color: white;
+    background-color: #f8d7da;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn:focus, .btn-danger:focus, .btn-primary:focus {
+    outline: 3px solid #0056b3;
+}

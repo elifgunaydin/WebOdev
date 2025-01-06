@@ -1,0 +1,79 @@
+﻿@model KuaforWebSitesi.Models.Musteri
+
+@{
+    ViewBag.Title = "Profil Görüntüle";
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Görüntüle</title>
+    <link rel="stylesheet" href="~/css/ProfilGoruntule.css" asp-append-version="true" /> 
+
+
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Profiliniz</h2>
+
+        @if (TempData["msj"] != null)
+        {
+            <div class="alert">
+                @TempData["msj"]
+            </div>
+        }
+
+        <div class="card">
+            <div class="card-header">
+                <h4>@Model.MusteriAd @Model.MusteriSoyad</h4>
+            </div>
+            <div class="card-body">
+                <div class="info-section">
+                    <p><strong>Adınız Soyadınız: </strong>@Model.MusteriAd @Model.MusteriSoyad</p>
+                    <p><strong>E-posta:</strong> @Model.MusteriMail</p>
+                    <p><strong>Telefon:</strong> @Model.MusteriTelefon</p>
+                </div>
+
+                <hr />
+
+                <div class="appointment-section">
+                    <h5>Aktif Randevu Bilgileriniz</h5>
+                    @if (ViewBag.AktifRandevular != null && ViewBag.AktifRandevular.Count > 0)
+                    {               
+                            <ul class="appointment-list">
+                                @foreach (var randevu in ViewBag.AktifRandevular)
+                                {
+                                     <li class="appointment-item">
+                                    <div class="appointment-header">
+                                        <p><strong>Tarih:</strong> @randevu.Tarih.ToString(@"dd/MM/yyyy")</p>
+                                        <p><strong>Saat:</strong> @randevu.Saat.ToString(@"hh\:mm")</p>
+                                    </div>
+                                    <div class="appointment-details">
+                                        <p><strong>Hizmet:</strong> @randevu.Hizmetler.HizmetAdi</p>
+                                       
+                                        <p><strong>Çalışan:</strong> @randevu.Calisan.CalisanAd @randevu.Calisan.CalisanSoyad</p>
+                                        <p><strong>Randevu Durumu:</strong> @randevu.Durum  </p></div>
+                                    </li>
+                                }
+                            </ul>                     
+                    }
+                    else
+                    {
+                        <div class="no-appointment">
+                            <p>Aktif randevunuz bulunmamaktadır.</p>
+                            <a href="@Url.Action("RandevuAl", "Randevu")" class="btn btn-success">Randevu Al</a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("ProfilGuncelle", "Musteri")" class="btn btn-primary">Profil Düzenle</a>
+                <a href="@Url.Action("MusteriCikis", "Musteri")" class="btn btn-danger">Çıkış Yap</a>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

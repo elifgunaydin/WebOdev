@@ -1,0 +1,131 @@
+﻿.hizmetler {
+    padding: 0px 20px;
+}
+
+
+.hizmetler .wrapper {
+    width: 60%;
+    height: auto;
+    margin: 50px auto;
+    max-width: 1366px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+}
+
+
+.hizmetler .wrapper:nth-child(n+1) {
+    flex-direction: row-reverse;
+}
+
+.hizmetler .wrapper .text {
+    flex: 1;
+    padding: 5px;
+}
+
+.hizmetler h1 {
+    font-family: 'Dancing Script',cursive;
+    text-align: center;
+    color: #CBB26A;
+}
+
+.hizmetler .wrapper .text h1 {
+    font-family: 'Josefin Sans',sans-serif;
+    padding: 10px;
+    font-size: 1.2rem;
+    line-height: 25px;
+}
+
+.hizmetler .wrapper .text p::first-letter {
+    margin-left: 10px;
+}
+
+.hizmetler .wrapper .photo {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.hizmetler .wrapper .photo img {
+    border-radius: 10px;
+    cursor: pointer;
+    height: auto;
+    transition: all 0.5s;
+}
+
+.hizmetler .wrapper .photo img:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+.hizmetler .wrapper {
+        opacity: 0;
+        transition: all 0.5s;
+    }
+
+.hizmetler .wrapper.active {
+            opacity: 1;
+        }
+
+.hizmetler .wrapper .text {
+            transform: translateX(-30px);
+            transition: all 0.5s;
+        }
+
+.hizmetler .wrapper.active .text {
+    transform: translateX(0px);
+}
+
+.hizmetler .wrapper .text {
+    transform: translateX(-30px);
+    transition: all 0.5s;
+}
+
+.hizmetler .wrapper:nth-child(n+1) .text {
+    transform: translateX(30px);
+    transition: all 0.5s;
+}
+
+.hizmetler .wrapper.active .text {
+    transform: translateX(0px);
+}
+
+
+.hizmetler .wrapper .photo {
+    transform: translateX(30px);
+    transition: all 0.5s;
+}
+
+.hizmetler .wrapper:nth-child(n+1) .photo {
+    transform: translateX(-30px);
+    transition: all 0.5s;
+}
+
+.hizmetler .wrapper.active .photo {
+    transform: translateX(0px);
+}
+
+
+.text table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 10px auto;
+    font-family: Arial, sans-serif;
+}
+
+.text th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.text th {
+    background-color: #CBB26A;
+}
+
+.text tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

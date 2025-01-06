@@ -1,0 +1,154 @@
+﻿@model KuaforWebSitesi.Models.Musteri
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2 class="text-center">Profilinizi Güncelleyin</h2>
+
+        @if (TempData["msj"] != null)
+        {
+            <div class="alert alert-info">@TempData["msj"]</div>
+        }
+
+        <form asp-action="ProfilGuncelle" method="post">
+            <div class="form-group">
+                <label for="MusteriAd">Ad</label>
+                <input type="text" class="form-control" id="MusteriAd" name="MusteriAd" value="@Model.MusteriAd" required />
+            </div>
+            <div class="form-group">
+                <label for="MusteriSoyad">Soyad</label>
+                <input type="text" class="form-control" id="MusteriSoyad" name="MusteriSoyad" value="@Model.MusteriSoyad" required />
+            </div>
+            <div class="form-group">
+                <label for="MusteriMail">E-posta</label>
+                <input type="email" class="form-control" id="MusteriMail" name="MusteriMail" value="@Model.MusteriMail" required />
+            </div>
+            <div class="form-group">
+                <label for="MusteriTelefon">Telefon</label>
+                <input type="text" class="form-control" id="MusteriTelefon" name="MusteriTelefon" value="@Model.MusteriTelefon" required />
+            </div>
+            <div class="form-group">
+                <label for="MusteriSifre">Mevcut Şifre</label>
+                <input type="password" class="form-control" id="MusteriSifre" name="MusteriSifre" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Güncelle</button>
+            <i class="fas fa-arrow-left"></i> Geri
+
+            <!-- Şifre Değiştirme Butonu -->
+            <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#changePasswordModal">
+                Şifre Değiştir
+            </button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteAccountModal">
+                Hesabımı Sil
+            </button>
+        </form>
+
+        <!-- Hesap silme onay modal'ı -->
+        <div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteAccountModalLabel">Hesabınızı Silmek Üzeresiniz</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                        <!-- Form için POST methodunu kullanarak işlemi gönderiyoruz -->
+                        <form action="@Url.Action("MusteriHesapSil", "Musteri")" method="post">
+                            @Html.AntiForgeryToken() <!-- CSRF token ekleyin -->
+                            <button type="submit" class="btn btn-danger">Evet, Hesabımı Sil</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Şifre Değiştirme Modal -->
+        <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordModalLabel">Şifre Değiştir</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form asp-action="SifreDegistir" method="post">
+                            <div class="form-group">
+                                <label for="eskiSifre">Mevcut Şifre</label>
+                                <input type="password" class="form-control" id="eskiSifre" name="eskiSifre" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="yeniSifre">Yeni Şifre</label>
+                                <input type="password" class="form-control" id="yeniSifre" name="yeniSifre" required />
+                            </div>
+                         
+                           
+
+                            <div class="form-group">
+                                <label for="yeniSifreOnayi">Yeni Şifreyi Onayla</label>
+                                <input type="password" class="form-control" id="yeniSifreOnayi" name="yeniSifreOnayi" required />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Şifreyi Değiştir</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

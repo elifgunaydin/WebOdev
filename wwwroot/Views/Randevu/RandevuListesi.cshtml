@@ -1,0 +1,71 @@
+﻿@model IEnumerable<KuaforWebSitesi.Models.Randevu>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randevu Listesi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2 class="my-4">Bekleyen Randevular</h2>
+
+        @if (TempData["msj"] != null)
+        {
+            <div class="alert alert-info">@TempData["msj"]</div>
+        }
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Müşteri</th>
+                    <th>Çalışan</th>
+           @*          <th>Hizmet</th> *@
+                    <th>Randevu Tarihi</th>
+                    <th>Saat</th>
+                    <th>Durum</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var randevu in Model)
+                {
+                    <tr>
+                        <td>@randevu.Musteri.MusteriAd @randevu.Musteri.MusteriSoyad</td>
+                        <td>@randevu.Calisan.CalisanAd @randevu.Calisan.CalisanSoyad</td>
+                      @*   <td>@randevu.Hizmetler.HizmetAdi<br /></td> *@
+                        <td>@randevu.Tarih.ToString("dd MMM yyyy")</td>
+                        <td>
+                            @if (randevu.Saat != null)
+                            {
+                                @randevu.Saat.ToString(@"hh\:mm")
+                            }
+                            else
+                            {
+                                <span>Geçersiz Saat</span>
+                            }
+                        </td>
+
+                        <td>@randevu.Durum</td>
+                        <td>
+                            <form asp-action="RandevuOnayla" method="post" style="display:inline;">
+                                <input type="hidden" name="randevuID" value="@randevu.RandevuID" />
+                                <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                            </form>
+                            <form asp-action="RandevuSil" method="post" style="display:inline;">
+                                <input type="hidden" name="randevuID" value="@randevu.RandevuID" />
+                                <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

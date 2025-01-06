@@ -1,0 +1,97 @@
+﻿@model List<KuaforWebSitesi.Models.Iletisim>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/iletisim.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/fontFamily.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>İletişim</h1>
+
+        <!-- İletişim formu -->
+        <div class="contact-form">
+            <h2>Bize Mesaj Gönderin</h2>
+            <form id="contactForm" action="/api/Iletisim" method="post">
+                <input type="text" name="Ad" placeholder="Adınız" required>
+                <input type="email" name="Eposta" placeholder="E-posta Adresiniz" required>
+                <textarea name="Mesaj" rows="5" placeholder="Mesajınız" required></textarea>
+                <button type="submit">Gönder</button>
+            </form>
+
+
+        </div>
+
+        <div class="contact-header">
+            <h1>Bize Ulaşın</h1>
+            <p>Herhangi bir sorunuz veya geri bildiriminiz varsa lütfen bizimle iletişime geçin.</p>
+        </div>
+
+        <!-- İletişim Bilgileri -->
+        <div class="contact-info">
+            <div class="info-box">
+                <i class="fas fa-map-marker-alt"></i>
+                <h2>Adres</h2>
+                <p>İstanbul, Beşiktaş</p>
+                <iframe src="https://www.google.com/maps/embed?pb=..." allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-phone"></i>
+                <h2>Telefon</h2>
+                <p><a href="Tel:+902123456789">+90 212 345 67 89</a></p>
+                <i class="fas fa-envelope"></i>
+                <h2>Email</h2>
+                <p><a href="mailto:info@shineLab.com">info@shineLab.com</a></p>
+            </div>
+            <div class="info-box">
+                <i class="fas fa-clock"></i>
+                <h2>Çalışma Saatleri</h2>
+                <p>Hafta içi: 09:00 - 18:00</p>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        const form = document.querySelector('#contactForm');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Sayfa yenilenmesini engelle
+
+            const formData = new FormData(form);
+            const data = {
+                Ad: formData.get('Ad'), // name="Ad" input değerini al
+                Eposta: formData.get('Eposta'), // name="Eposta" input değerini al
+                Mesaj: formData.get('Mesaj') // name="Mesaj" textarea değerini al
+            };
+
+            try {
+                const response = await fetch('/api/Iletisim', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data) // JSON formatında veri gönderme
+                });
+
+                const result = await response.json(); // API'den gelen yanıtı al
+                if (response.ok) {
+                    alert(result.message); // Başarılı yanıtı göster
+                } else {
+                    alert('Bir hata oluştu.');
+                }
+            } catch (error) {
+                console.error('Mesaj gönderme sırasında bir hata oluştu:', error);
+                alert('Bir hata oluştu.');
+            }
+        });
+
+    </script>
+</body>
+</html>
+

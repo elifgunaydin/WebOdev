@@ -1,0 +1,58 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4; /* Arka plan rengi */
+    font-family: 'Arial', sans-serif; /* Yazı tipi */
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff; /* İçeriğin arka plan rengi */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.stilist-foto {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Fotoğraf ve bilgilere aralık bırakır */
+}
+
+.stilist-bilgi {
+    padding: 10px;
+}
+
+    .stilist-bilgi h1 {
+        margin-bottom: 15px;
+    }
+
+    .stilist-bilgi p {
+        margin: 10px 0;
+    }
+
+    .stilist-bilgi a {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        text-decoration: none;
+        background-color: #007BFF;
+        color: #ffffff;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+        .stilist-bilgi a:hover {
+            background-color: #0056b3;
+        }

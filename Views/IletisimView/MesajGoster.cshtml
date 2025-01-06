@@ -1,0 +1,32 @@
+﻿@model List<KuaforWebSitesi.Models.Iletisim>
+
+
+<!-- Gönderilen mesajları listeleme -->
+<h2>Gönderilen Mesajlar</h2>
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>E-posta</th>
+                <th>Mesaj</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.IletisimId</td>
+                    <td>@item.Ad</td>
+                    <td>@item.Eposta</td>
+                    <td>@item.Mesaj</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Henüz gönderilmiş bir mesaj yok.</p>
+}

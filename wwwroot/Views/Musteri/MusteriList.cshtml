@@ -1,0 +1,64 @@
+﻿@model IEnumerable<KuaforWebSitesi.Models.Musteri>
+
+<div class="alert-danger">@TempData["msj"]</div>
+@if (Model.Count() <1)
+{
+    <div style="text-align:center" class="alert-info">Herhangi Bir Müşteri Yok</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MusteriAd)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MusteriSoyad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MusteriMail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MusteriTelefon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MusteriSifre)
+                </th>
+           
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MusteriAd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MusteriSoyad)
+                    </td>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MusteriMail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MusteriTelefon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MusteriSifre)
+                    </td>
+                   
+                  
+                    <td>
+                        @* @Html.ActionLink("Edit", "MusteriGuncelle", new { id = item.MusteriID })| *@
+                        @Html.ActionLink("Profili Gör", "MusteriGoruntule", new { id = item.MusteriID }) |
+                        @*  @Html.ActionLink("Delete", "Delete", new { id = item.MusteriID })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
